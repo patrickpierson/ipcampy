@@ -78,7 +78,8 @@ class FosCam(IpCam):
         """Retrieve some configuration params.
         Note: info are returned even without password"""
 
-        resp = requests.get("http://{0}/get_status.cgi".format(self.address))
+        payload = {"address":self.address, "user": self.user, "pwd": self.pswd}  
+        resp = requests.get("http://{address}/get_status.cgi?user={user}&amp;pwd={pwd}".format(**payload))
         data = resp.text.replace(";", "")
         data = data.replace("var", "")
         data_s = data.split("\n")
