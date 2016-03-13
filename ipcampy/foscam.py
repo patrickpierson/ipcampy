@@ -70,7 +70,7 @@ class FosCam(IpCam):
 
     def get_stream_url(self):
         """Returns streaming url"""
-        return "http://{0}/videostream.cgi?user={1}&amp;pwd={2}&amp;resolution=8&amp;rate=6".format(
+        return "http://{0}/videostream.cgi?user={1}&amp;pwd={2}&amp;resolution=32&amp;rate=6".format(
                 self.address, self.user, self.pswd
         )
 
@@ -78,7 +78,7 @@ class FosCam(IpCam):
         """Retrieve some configuration params.
         Note: info are returned even without password"""
 
-        payload = {"address":self.address, "user": self.user, "pwd": self.pswd}  
+        payload = {"address":self.address, "user": self.user, "pwd": self.pswd}
         resp = requests.get("http://{address}/get_status.cgi?user={user}&amp;pwd={pwd}".format(**payload))
         data = resp.text.replace(";", "")
         data = data.replace("var", "")
